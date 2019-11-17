@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Mydoc</string>
+
+
+    <string name="news_section">Section</string>
+    <string name="news_subsection">Subsection</string>
+    <string name="news_title">Title</string>
+    <string name="news_content">Content</string>
+    <string name="news_published_date">Published Date</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

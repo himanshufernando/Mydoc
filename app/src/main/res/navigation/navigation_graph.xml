@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_news">
+
+    <fragment
+        android:id="@+id/fragment_news"
+        android:name="himanshu.project.mydoc.views.fragments.NewsFragment"
+        android:label="Fragment News"
+        tools:layout="@layout/fragment_news">
+
+        <action
+            android:id="@+id/fragmentNewstoNewsContent"
+            app:destination="@id/fragment_news_content" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_news_content"
+        android:name="himanshu.project.mydoc.views.fragments.NewsContentFragment"
+        android:label="Fragment News Content"
+        tools:layout="@layout/fragment_news_content">
+
+        <argument
+            android:name="name"
+            android:defaultValue="Android"
+            app:argType="string" />
+
+    </fragment>
+
+
+</navigation>

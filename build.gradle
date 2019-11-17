@@ -43,6 +43,7 @@ buildscript {
 
         glideVersion = '4.9.0'
         glideCompilerVersion = '4.9.0'
+        navigationSafeArgs = '1.0.0-alpha01'
 
         //test dependencies
         junitVersion = '4.12'
@@ -61,6 +62,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$navigationSafeArgs"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

@@ -12,12 +12,8 @@ object CustomBindingAdapter {
     @BindingAdapter("url")
     @JvmStatic
     fun url(view: ImageView, url: List<Multimedia>) {
-        var finalUrl =""
-        if(url.isNotEmpty()){
-            finalUrl = url.last().url
-        }
         Glide.with(view.context)
-            .load(finalUrl)
+            .load(url.last().url!!)
             .placeholder(R.drawable.mydoclogo)
             .centerCrop()
             .into(view)

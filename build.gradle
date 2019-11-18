@@ -44,6 +44,7 @@ buildscript {
         glideVersion = '4.9.0'
         glideCompilerVersion = '4.9.0'
         navigationSafeArgs = '1.0.0-alpha09'
+        swiperefreshlayout = '1.0.0'
 
         //test dependencies
         junitVersion = '4.12'

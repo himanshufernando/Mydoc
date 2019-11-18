@@ -7,13 +7,13 @@ import androidx.room.TypeConverters
 @Entity(tableName = "dataDB")
 @TypeConverters(Converters::class)
 data class Data(
-    @PrimaryKey val dataId: Long,
-    var copyright: String,
-    var last_updated: String,
-    var num_results: Int,
-    var section: String,
-    var status: String,
-    var results: List<ResultResponse>
+    @PrimaryKey val dataId: Long?,
+    var copyright: String?,
+    var last_updated: String?,
+    var num_results: Int?,
+    var section: String?,
+    var status: String?,
+    var results: List<ResultResponse>?
 ){
 
 }

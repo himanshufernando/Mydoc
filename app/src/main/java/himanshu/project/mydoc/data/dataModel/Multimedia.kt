@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "multimedia")
 data class Multimedia(
-    @PrimaryKey  val multimediaId: Long,
-    var caption: String,
-    var type: String,
-    var url: String
+    @PrimaryKey  val multimediaId: Long?,
+    var caption: String?,
+    var type: String?,
+    var url: String?
 )

@@ -32,6 +32,7 @@ class NewsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_news, container,false)
         binding.news=viewmodel
 
+
         return binding.root
     }
 

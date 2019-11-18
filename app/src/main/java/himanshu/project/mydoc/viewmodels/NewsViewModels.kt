@@ -20,23 +20,30 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
     private val _selectedResultResponse = MutableLiveData<ResultResponse>()
     val selectedResultResponse: LiveData<ResultResponse> = _selectedResultResponse
 
+    val dataRefrash = MutableLiveData<Boolean>()
 
-    val newsList: LiveData<Result<Data>> = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-        isNewsListLoading.set(true)
-        try {
-            emit(Result.success(repo.getNews()))
-            isNewsListLoading.set(false)
-        } catch(ioException: Throwable) {
-            isNewsListLoading.set(false)
-            emit(Result.failure(ioException))
+    init {
+        dataRefrash.value=true
+    }
+
+    val newsList = dataRefrash.switchMap { id ->
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            isNewsListLoading.set(true)
+            try {
+                emit(Result.success(repo.getNews()))
+                isNewsListLoading.set(false)
+            } catch(ioException: Throwable) {
+                isNewsListLoading.set(false)
+                emit(Result.failure(ioException))
+            }
         }
     }
+
 
 
     fun setNewsDetails(resultResponse: ResultResponse){
         _selectedResultResponse.value = resultResponse
     }
-
 
 
     object LiveDataVMFactory : ViewModelProvider.Factory {

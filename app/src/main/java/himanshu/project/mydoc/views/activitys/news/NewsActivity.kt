@@ -21,5 +21,6 @@ class NewsActivity : AppCompatActivity() {
 
 
 
+
 }
 

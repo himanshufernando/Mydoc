@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.*
 import himanshu.project.mydoc.MyDoc
 import himanshu.project.mydoc.data.dataModel.Data
+import himanshu.project.mydoc.data.dataModel.ResultResponse
 import himanshu.project.mydoc.data.db.AppDatabase
 import himanshu.project.mydoc.data.db.DataDao
 import himanshu.project.mydoc.repo.NewsRepo
@@ -14,8 +15,10 @@ import kotlinx.coroutines.Dispatchers
 class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : ViewModel() {
 
     val isNewsListLoading = ObservableField<Boolean>()
-    private val reloadTrigger = MutableLiveData<Boolean>()
     var repo = NewsRepo(client,dataDao)
+
+    private val _selectedResultResponse = MutableLiveData<ResultResponse>()
+    val selectedResultResponse: LiveData<ResultResponse> = _selectedResultResponse
 
 
     val newsList: LiveData<Result<Data>> = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
@@ -29,6 +32,10 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
         }
     }
 
+
+    fun setNewsDetails(resultResponse: ResultResponse){
+        _selectedResultResponse.value = resultResponse
+    }
 
 
 

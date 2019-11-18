@@ -1,14 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.fragments.NewsContentFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viemodelcontent"
+            type="himanshu.project.mydoc.viewmodels.NewsViewModels" />
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".views.fragments.NewsContentFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                app:url="@{viemodelcontent.selectedResultResponse.multimedia}"
+                android:scaleType="centerInside" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/appbar_padding_top">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@string/news_section" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/appbar_padding_top"
+                    android:text="@={viemodelcontent.selectedResultResponse.section}"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorTxt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@string/news_subsection" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@={viemodelcontent.selectedResultResponse.subsection}"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/appbar_padding_top" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@string/news_published_date" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    app:pubDate="@{viemodelcontent.selectedResultResponse.published_date}"
+                    android:layout_marginLeft="@dimen/appbar_padding_top"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textView_tool_borrowed_count_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@string/news_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@={viemodelcontent.selectedResultResponse.title}"
+                    android:layout_marginLeft="@dimen/appbar_padding_top"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/appbar_padding_top"
+                android:layout_marginBottom="@dimen/appbar_padding_top"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@string/news_content" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTxt"
+                    android:text="@={viemodelcontent.selectedResultResponse.newsContent}"
+                    android:layout_marginLeft="@dimen/appbar_padding_top"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

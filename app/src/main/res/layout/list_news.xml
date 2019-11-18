@@ -34,6 +34,14 @@
             android:orientation="vertical"
             android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:adjustViewBounds="true"
+                app:url="@{item.multimedia}"
+                android:scaleType="centerInside" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"

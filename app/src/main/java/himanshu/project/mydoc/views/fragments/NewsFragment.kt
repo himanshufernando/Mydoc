@@ -26,42 +26,38 @@ import kotlinx.android.synthetic.main.fragment_news.view.*
 class NewsFragment : Fragment() {
 
     private val viewmodel: NewsViewModels by viewModels { NewsViewModels.LiveDataVMFactory }
+    lateinit var binding:FragmentNewsBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        var binding:FragmentNewsBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_news, container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_news, container,false)
         binding.news=viewmodel
-
-        val adapter = NewsAdapters()
-        binding.root.recyclerview_news_list.adapter = adapter
-        subscribeNewsToUi(adapter)
 
         return binding.root
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val adapter = NewsAdapters()
+        binding.root.recyclerview_news_list.adapter = adapter
+        subscribeNewsToUi(adapter)
     }
-    private fun subscribeNewsToUi(adapter: NewsAdapters) {
-        viewmodel.newsList.observe(viewLifecycleOwner){news -> news.onSuccess {it
-            adapter.submitList(it.results)
-            adapter.setOnItemClickListener(object : NewsAdapters.ClickListener {
-                override fun onClick(resultResponse: ResultResponse, aView: View) {
-
-
-
-                    val bundle = bundleOf("amount" to resultResponse)
-                    view?.findNavController()?.navigate(R.id.fragmentNewstoNewsContent,bundle)
+        private fun subscribeNewsToUi(adapter: NewsAdapters) {
+            viewmodel.newsList.observe(viewLifecycleOwner){news ->
+                news.onSuccess {it
+                adapter.submitList(it.results)
+                adapter.setOnItemClickListener(object : NewsAdapters.ClickListener {
+                    override fun onClick(resultResponse: ResultResponse, aView: View) {
+                        val resultAcction = NewsFragmentDirections.fragmentNewstoNewsContent(resultResponse)
+                        view?.findNavController()?.navigate(resultAcction)
+                    }
+                })
+            }
+                news.onFailure {it
+                    val networkErrorHandler = NetworkErrorHandler()
+                    errorAlertDialog(networkErrorHandler(it))
                 }
-            })
-        }
-            news.onFailure {it
-                val networkErrorHandler = NetworkErrorHandler()
-                errorAlertDialog(networkErrorHandler(it))
             }
         }
-    }
 
 
     private fun errorAlertDialog(networkError: NetworkError) {
@@ -73,6 +69,8 @@ class NewsFragment : Fragment() {
             DialogInterface.OnClickListener { _, _ -> return@OnClickListener })
         alertDialogBuilder.show()
     }
+
+
 
 
 }

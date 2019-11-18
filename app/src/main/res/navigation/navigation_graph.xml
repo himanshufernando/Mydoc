@@ -23,9 +23,9 @@
         tools:layout="@layout/fragment_news_content">
 
         <argument
-            android:name="name"
-            android:defaultValue="Android"
-            app:argType="string" />
+            android:name="RresultDetails"
+            app:argType="himanshu.project.mydoc.data.dataModel.ResultResponse" />
+
 
     </fragment>
 

@@ -12,8 +12,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
-        android:name=".MyDoc"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:name=".MyDoc">
         <activity android:name=".views.activitys.news.NewsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

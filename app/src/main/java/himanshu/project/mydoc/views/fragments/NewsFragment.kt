@@ -33,8 +33,12 @@ class NewsFragment : Fragment() {
         binding.news=viewmodel
 
 
+        binding.root.swipe_refresh_layout.setOnRefreshListener {
+            viewmodel.refreshUsers()
+        }
         return binding.root
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -42,9 +46,9 @@ class NewsFragment : Fragment() {
         binding.root.recyclerview_news_list.adapter = adapter
         subscribeNewsToUi(adapter)
     }
-        private fun subscribeNewsToUi(adapter: NewsAdapters) {
-            viewmodel.newsList.observe(viewLifecycleOwner){news ->
-                news.onSuccess {it
+    private fun subscribeNewsToUi(adapter: NewsAdapters) {
+        viewmodel.newsList.observe(viewLifecycleOwner){news ->
+            news.onSuccess {it
                 adapter.submitList(it.results)
                 adapter.setOnItemClickListener(object : NewsAdapters.ClickListener {
                     override fun onClick(resultResponse: ResultResponse, aView: View) {
@@ -53,13 +57,12 @@ class NewsFragment : Fragment() {
                     }
                 })
             }
-                news.onFailure {it
-                    val networkErrorHandler = NetworkErrorHandler()
-                    errorAlertDialog(networkErrorHandler(it))
-                }
+            news.onFailure {it
+                val networkErrorHandler = NetworkErrorHandler()
+                errorAlertDialog(networkErrorHandler(it))
             }
         }
-
+    }
 
     private fun errorAlertDialog(networkError: NetworkError) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())

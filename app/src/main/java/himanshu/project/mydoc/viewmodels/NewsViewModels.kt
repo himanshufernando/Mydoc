@@ -14,32 +14,44 @@ import kotlinx.coroutines.Dispatchers
 
 class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : ViewModel() {
 
-    val isNewsListLoading = ObservableField<Boolean>()
+
     var repo = NewsRepo(client,dataDao)
 
     private val _selectedResultResponse = MutableLiveData<ResultResponse>()
     val selectedResultResponse: LiveData<ResultResponse> = _selectedResultResponse
 
-    val dataRefrash = MutableLiveData<Boolean>()
+    private val _userPreferences = MutableLiveData<String>()
+    val userPreferences: LiveData<String> = _userPreferences
+
 
     init {
-        dataRefrash.value=true
+        refreshUsers()
     }
 
-    val newsList = dataRefrash.switchMap { id ->
+  /*  val newsList: LiveData<Result<Data>> = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        try {
+            emit(Result.success(repo.getNews()))
+        } catch(ioException: Throwable) {
+            emit(Result.failure(ioException))
+        }
+    }
+
+*/
+
+
+    val newsList = userPreferences.switchMap { id ->
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-            isNewsListLoading.set(true)
             try {
                 emit(Result.success(repo.getNews()))
-                isNewsListLoading.set(false)
             } catch(ioException: Throwable) {
-                isNewsListLoading.set(false)
                 emit(Result.failure(ioException))
             }
         }
     }
 
-
+    fun refreshUsers() {
+        _userPreferences.value = "bitcoin"
+    }
 
     fun setNewsDetails(resultResponse: ResultResponse){
         _selectedResultResponse.value = resultResponse

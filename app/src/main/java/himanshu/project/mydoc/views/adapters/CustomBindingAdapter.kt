@@ -12,11 +12,13 @@ object CustomBindingAdapter {
     @BindingAdapter("url")
     @JvmStatic
     fun url(view: ImageView, url: List<Multimedia>) {
-        Glide.with(view.context)
-            .load(url.last().url!!)
-            .placeholder(R.drawable.mydoclogo)
-            .centerCrop()
-            .into(view)
+        if(!url.isEmpty())
+            Glide.with(view.context)
+                .load(url.last().url!!)
+                .placeholder(R.drawable.mydoclogo)
+                .centerCrop()
+                .into(view)
+
     }
 
     @BindingAdapter("pubDate")

@@ -21,16 +21,16 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
     val selectedResultResponse: LiveData<ResultResponse> = _selectedResultResponse
 
     private val _newsRefrashStatus = MutableLiveData<Boolean>()
-    val userPreferences: LiveData<Boolean> = _newsRefrashStatus
+    val newsRefrashStatus: LiveData<Boolean> = _newsRefrashStatus
 
 
 
     init {
-        refreshUsers()
+        refreshNews()
     }
 
 
-    val newsList = userPreferences.switchMap { id ->
+    val newsList = newsRefrashStatus.switchMap { id ->
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
             try {
                 emit(Result.success(repo.getNews()))
@@ -40,9 +40,13 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
         }
     }
 
-    fun refreshUsers() {
+    fun refreshNews() {
         _newsRefrashStatus.value =true
     }
+
+
+
+
 
 
     fun setNewsDetails(resultResponse: ResultResponse){

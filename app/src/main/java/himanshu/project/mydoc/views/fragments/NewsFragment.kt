@@ -34,7 +34,7 @@ class NewsFragment : Fragment() {
 
 
         binding.root.swipe_refresh_layout.setOnRefreshListener {
-            viewmodel.refreshUsers()
+            viewmodel.refreshNews()
         }
         return binding.root
     }

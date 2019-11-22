@@ -12,18 +12,17 @@ object CustomBindingAdapter {
     @BindingAdapter("url")
     @JvmStatic
     fun url(view: ImageView, url: List<Multimedia>) {
-        if(!url.isEmpty())
-            Glide.with(view.context)
-                .load(url.last().url!!)
-                .placeholder(R.drawable.mydoclogo)
-                .centerCrop()
-                .into(view)
+        var imagePath = if (url.isNotEmpty()) { url.last().url!! } else { "" }
+        Glide.with(view.context).load(imagePath)
+            .placeholder(R.drawable.mydoclogo)
+            .centerCrop()
+            .into(view)
 
     }
 
     @BindingAdapter("pubDate")
     @JvmStatic
-    fun setDate(view : TextView, date: String) {
-        view.text = date.substring(1,10).toString()
+    fun setDate(view: TextView, date: String) {
+        view.text = date.substring(1, 10).toString()
     }
 }

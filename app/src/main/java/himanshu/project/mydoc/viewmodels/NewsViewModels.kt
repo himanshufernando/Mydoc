@@ -20,23 +20,14 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
     private val _selectedResultResponse = MutableLiveData<ResultResponse>()
     val selectedResultResponse: LiveData<ResultResponse> = _selectedResultResponse
 
-    private val _userPreferences = MutableLiveData<String>()
-    val userPreferences: LiveData<String> = _userPreferences
+    private val _newsRefrashStatus = MutableLiveData<Boolean>()
+    val userPreferences: LiveData<Boolean> = _newsRefrashStatus
+
 
 
     init {
         refreshUsers()
     }
-
-  /*  val newsList: LiveData<Result<Data>> = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
-        try {
-            emit(Result.success(repo.getNews()))
-        } catch(ioException: Throwable) {
-            emit(Result.failure(ioException))
-        }
-    }
-
-*/
 
 
     val newsList = userPreferences.switchMap { id ->
@@ -50,8 +41,9 @@ class NewsViewModels(private val client: APIInterface,val dataDao : DataDao) : V
     }
 
     fun refreshUsers() {
-        _userPreferences.value = "bitcoin"
+        _newsRefrashStatus.value =true
     }
+
 
     fun setNewsDetails(resultResponse: ResultResponse){
         _selectedResultResponse.value = resultResponse

@@ -47,8 +47,11 @@ class NewsFragment : Fragment() {
         subscribeNewsToUi(adapter)
     }
     private fun subscribeNewsToUi(adapter: NewsAdapters) {
+        binding.root.swipe_refresh_layout.isRefreshing = true
+
         viewmodel.newsList.observe(viewLifecycleOwner){news ->
             news.onSuccess {it
+                binding.root.swipe_refresh_layout.isRefreshing = false
                 adapter.submitList(it.results)
                 adapter.setOnItemClickListener(object : NewsAdapters.ClickListener {
                     override fun onClick(resultResponse: ResultResponse, aView: View) {
